@@ -1,0 +1,416 @@
+@charset "utf-8";
+/* CSS Document */
+/*
+  $Id$
+
+  Designed for: osCommerce, Open Source E-Commerce Solutions
+  http://www.oscommerce.com
+
+  Surfalot CMS
+  Copyright (c) 2017 Todd Holforty - mtholforty (at) surfalot (at) com
+
+  Released under the GNU General Public License
+*/
+    
+
+    .fleft { float: left; } 
+    .fright { float: right; } 
+
+    .clearfix:after {
+      clear: both;
+    }
+    .clearfix:before,
+    .clearfix:after {
+      display: table;
+      content: " ";
+    }
+    
+    .container {
+      *zoom: 1;
+      padding: 0;
+    }
+    
+    .container:before,
+    .container:after {
+      display: table;
+      line-height: 0;
+      content: "";
+    }
+    
+    .container:after {
+      clear: both;
+    }
+    
+    /* For mobile: */
+    [class*="col-"] {
+        width: 100%;
+    }
+    @media only screen and (min-width: 800px) {
+        /* For tablets: */
+        .col-m-1 {width: 8.33%;}
+        .col-m-2 {width: 16.66%;}
+        .col-m-3 {width: 25%;}
+        .col-m-4 {width: 33.33%;}
+        .col-m-5 {width: 41.66%;}
+        .col-m-6 {width: 50%;}
+        .col-m-7 {width: 58.33%;}
+        .col-m-8 {width: 66.66%;}
+        .col-m-9 {width: 75%;}
+        .col-m-10 {width: 83.33%;}
+        .col-m-11 {width: 91.66%;}
+        .col-m-12 {width: 100%;}
+    }
+    @media only screen and (min-width: 1200px) {
+        /* For desktop: */
+        .col-1 {width: 8.33%;}
+        .col-2 {width: 16.66%;}
+        .col-3 {width: 25%;}
+        .col-4 {width: 33.33%;}
+        .col-5 {width: 41.66%;}
+        .col-6 {width: 50%;}
+        .col-7 {width: 58.33%;}
+        .col-8 {width: 66.66%;}
+        .col-9 {width: 75%;}
+        .col-10 {width: 83.33%;}
+        .col-11 {width: 91.66%;}
+        .col-12 {width: 100%;}
+    }
+
+    div#SurfCMS-docs {
+        max-width: 940px;
+        margin: 0 auto;
+        font-family: 'Trebuchet MS', Arial;
+        font-size: 10px;
+    }
+    
+    #SurfCMS-docs p, 
+    #SurfCMS-docs li {
+        line-height: 1.6em;
+        font-size: 1.5em;
+    }
+    
+    #SurfCMS-docs li p,
+    #SurfCMS-docs li li,
+    #SurfCMS-docs li li p,
+    #SurfCMS-docs li li li,
+    #SurfCMS-docs li li li p {
+        line-height: 1.6em;
+        font-size: 1.0em;
+    }
+    
+    #SurfCMS-docs p {
+        margin: 12px 0;
+        padding: 0;
+    }
+    
+    #SurfCMS-docs .fleft { float: left; }
+    #SurfCMS-docs .fright { float: right; }
+    
+    #SurfCMS-docs .indented { margin: 0 15px; }
+    
+    #SurfCMS-docs h1 {
+        font-family: 'Trebuchet MS', Arial;
+        color: #5A8CB6;
+        font-weight: bold;
+        font-size: 2.8em;
+    }
+    #SurfCMS-docs h2 {
+        font-family: 'Trebuchet MS', Arial;
+        color: #427095;
+        font-weight: bold;
+        font-size: 2.2em;
+    }
+    #SurfCMS-docs h3 {
+        font-family: 'Trebuchet MS', Arial;
+        color: #000;
+        font-weight: bold;
+        font-size: 1.8em;
+    }
+    
+    #SurfCMS-docs .section-title {
+        display: inline-block;
+        position: relative;
+        margin: 1px 0;
+        font-family: 'Trebuchet MS', Arial;
+        color: #427095;
+        font-weight: bold;
+        font-size: 2em;
+    }
+    #SurfCMS-docs .paragraph-title {
+        display: block;
+        position: relative;
+        margin-top: 12px;
+        font-family: 'Trebuchet MS', Arial;
+        color: #427095;
+        font-weight: bold;
+        line-height: 1.3em;
+        font-size: 1.3em;
+    }
+    #SurfCMS-docs li .paragraph-title,
+    #SurfCMS-docs li li .paragraph-title,
+    #SurfCMS-docs li li li .paragraph-title {
+        line-height: 1.3em;
+        font-size: 1.3em;
+    }
+    #SurfCMS-docs .list-title {
+        font-family: 'Trebuchet MS', Arial;
+        color: #427095;
+        font-weight: bold;
+        font-size: 1.1em;
+    }
+    /* banner */
+    #SurfCMS-docs .content-banner {
+        background: #5A8CB6;
+        margin-bottom: 12px;
+        padding: 12px;
+        -webkit-border-radius: 3px;
+           -moz-border-radius: 3px;
+                border-radius: 3px;
+    }
+    #SurfCMS-docs .content-banner-title h1,
+    #SurfCMS-docs .content-banner-title h2,
+    #SurfCMS-docs .content-banner-title h3 {
+        color: #fff;
+        margin: 0;
+        padding: 0;
+    }
+    #SurfCMS-docs .content-banner-title {
+        float: left;
+    }
+    #SurfCMS-docs .content-banner-logo {
+        margin: 5px 25px 5px;
+        padding: 0;    
+        background: url(data:image/gif;base64,iVBORw0KGgoAAAANSUhEUgAAAOYAAAAyCAYAAABIxaeCAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAA2ZpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMy1jMDExIDY2LjE0NTY2MSwgMjAxMi8wMi8wNi0xNDo1NjoyNyAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wTU09Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9tbS8iIHhtbG5zOnN0UmVmPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VSZWYjIiB4bWxuczp4bXA9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC8iIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDoyQjJBMkRENEVGNzdFMjExOUE1OUM3MzkyOUJCMjcxOCIgeG1wTU06RG9jdW1lbnRJRD0ieG1wLmRpZDpERTJENjM3RjhDOTQxMUU3QjA1MEVENzE4QkNERjcwQiIgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpERTJENjM3RThDOTQxMUU3QjA1MEVENzE4QkNERjcwQiIgeG1wOkNyZWF0b3JUb29sPSJBZG9iZSBQaG90b3Nob3AgQ1M2IChXaW5kb3dzKSI+IDx4bXBNTTpEZXJpdmVkRnJvbSBzdFJlZjppbnN0YW5jZUlEPSJ4bXAuaWlkOjg2RjRFQjlENEVDN0U2MTFCNjYxRTU1MTBCNTEwRjExIiBzdFJlZjpkb2N1bWVudElEPSJ4bXAuZGlkOjJCMkEyREQ0RUY3N0UyMTE5QTU5QzczOTI5QkIyNzE4Ii8+IDwvcmRmOkRlc2NyaXB0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)
+        no-repeat;
+        float: right;
+        width: 230px;
+        height: 50px;            
+    }
+    
+    
+    /* contents */
+    #SurfCMS-docs .contents-block {
+        min-width: 400px;
+    }
+    #SurfCMS-docs .contents-align {
+        text-align:center;
+    }
+    #SurfCMS-docs .contents-align ul,
+    #SurfCMS-docs .contents-align ol {
+        display:inline-block;
+    }
+    #SurfCMS-docs .contents-align ul li,
+    #SurfCMS-docs .contents-align ol li {
+        text-align:left;
+    }
+    
+    #SurfCMS-docs .highlight-block {
+        margin: 14px 0;
+        padding: 14px;
+        background-color:#FFFFEA;
+    }
+    #SurfCMS-docs .highlight-block p {
+        margin-top: 0;
+    }
+    #SurfCMS-docs .plain-block {
+        margin: 14px 0;
+        padding: 14px;
+    }
+    #SurfCMS-docs .plain-block p {
+        margin-top: 0;
+    }
+    
+    
+    
+    #SurfCMS-docs a {
+        color:#427095;
+        font-weight:bold;
+        text-decoration:none;
+        border-bottom:#427095 dotted 1px;
+    }
+    #SurfCMS-docs a:hover {
+        border-bottom:#427095 solid 1px;
+    }
+    #SurfCMS-docs a[href="#"] {
+        margin-left: 1.8em;
+    }
+
+    #SurfCMS-docs span.title { 
+        position: absolute;
+        margin: -16px 0 0 18px;
+        background-color: #FFF;
+        padding: 1px 28px 1px 28px;
+        border: #5A8CB6 solid 2px;
+        -webkit-border-radius: 3px;
+           -moz-border-radius: 3px;
+                border-radius: 3px;
+        -moz-box-shadow: 1px 1px 2px gray; /* CSS3 shadows */
+         -webkit-shadow: 1px 1px 2px gray;
+             box-shadow: 1px 1px 2px gray;
+    }
+    #SurfCMS-docs textarea {
+        font: 90%/1.3 "Courier New", Courier, monospace;
+        /*letter-spacing: 1px;*/
+        background-color: #FFF;
+        display: inline-block;
+        white-space: nowrap;
+        white-space: pre;
+        width: 90%;
+        overflow: auto;
+        vertical-align: bottom;
+        padding: 18px 10px 6px 10px;
+        border: #5A8CB6 solid 2px;
+        -webkit-border-radius: 3px;
+           -moz-border-radius: 3px;
+              border-radius: 3px;
+        -moz-box-shadow: 1px 1px 2px gray; /* CSS3 shadows */
+         -webkit-shadow: 1px 1px 2px gray;
+             box-shadow: 1px 1px 2px gray;
+    }
+    
+    
+    #SurfCMS-docs ol {
+        list-style: none;
+        counter-reset: li; /* reset counter for ol (li is just arbitrary identifier) */
+    }
+    #SurfCMS-docs ol li {
+        position:relative;
+        margin-bottom: 20px; /* bottom spacing between lists */
+        padding: 0 10px;
+    }
+    #SurfCMS-docs ol ol {
+        margin-top: 1em; /* for nested ols, add top and bottom spacing */
+        margin-bottom: -5px;
+    }
+    #SurfCMS-docs ol > li:before { /* pseudo element for custom counter */
+        content: counter(li); /* set its content to CSS generated counter, using the "li" counter defined above */
+        counter-increment: li; /* increment the li counter each time, assumed starting index is 0 */
+        text-align: center;
+        display: block;
+        position: absolute;
+        width: 27px; /* width of counter */
+        height: 27px; /* height of counter */
+        line-height: 27px; /* set this to same as height value */
+        font-weight: bold;
+        top: -2px;
+        left: -30px; /* shift counter to the left */
+        background: #5A8CB6; /* background of counter */
+        color: white;
+        z-index: -1;
+        border-radius: 2px;
+        -moz-box-shadow: 1px 1px 2px gray; /* CSS3 shadows */
+         -webkit-shadow: 1px 1px 2px gray;
+             box-shadow: 1px 1px 2px gray;
+    }
+    #SurfCMS-docs ol ol > li:before { /* 2nd level custom counter specific style */
+        margin-left: 3px; /* move bullet to the left a little */
+        background-color: #427095;
+        border-radius: 12px;
+        width: 24px; /* width of counter */
+        height: 24px; /* height of counter */
+        line-height: 25px; /* set this to same as height value */
+    }
+    #SurfCMS-docs ol ol > li { /* 2nd level custom counter specific style */
+        margin-bottom: 14px; /* bottom spacing between lists */
+    }
+    #SurfCMS-docs ol ul > li:before { /* position uls within ols */
+        margin-top: 6px; /* move bullet down a little */
+        margin-left: 10px; /* move bullet to the left a little */
+    }
+    #SurfCMS-docs ol ol ol > li:before { /* 3rd level custom counter specific style */
+        margin-top: 4px; /* move bullet down a little */
+        margin-left: 6px; /* move bullet to the left a little */
+        background: #2E4E67;
+        border-radius: 22px;
+        width: 22px; /* width of counter */
+        height: 22px; /* height of counter */
+        line-height: 22px; /* set this to same as height value */
+    }
+    #SurfCMS-docs ol ol ol > li:before { /* 3rd level custom counter specific style */
+        margin-bottom: 0px; /* bottom spacing between lists */
+    }
+    
+    #SurfCMS-docs ul {
+        list-style: none;
+    }
+    #SurfCMS-docs ul li {
+        position:relative;
+        margin-bottom: 10px; /* bottom spacing between lists */
+    }
+    #SurfCMS-docs ul ul {
+        margin-top: 1em; /* for nested uls, add top and bottom spacing */
+        margin-bottom: -5px;
+    }
+    #SurfCMS-docs ul > li:before { /* pseudo element for custom list button */
+        content: '\0020'; /* set its content to a "dot" place holder */ /* try: 0020, 00a0, 00b7, 2022 */
+        font-size: 12px;
+        font-weight: bold;
+        text-align: center;
+        display: block;
+        position: absolute;
+        width: 12px; /* width of counter */
+        height: 12px; /* height of counter */
+        line-height: 12px; /* set this to same as height value */
+        top: 3px;
+        left: -22px; /* shift counter to the left */
+        color: #FFF;
+        background: #5A8CB6; /* dot color */
+        z-index: -1;
+        border-radius: 14px;  /* make it circular */
+        -moz-box-shadow: 1px 1px 2px gray; /* CSS3 shadows */
+         -webkit-shadow: 1px 1px 2px gray;
+             box-shadow: 1px 1px 2px gray;
+    }
+    #SurfCMS-docs ul ul > li:before { /* 2nd level custom counter specific style */
+        background: #2E4E67;
+        border-radius: 7px;  /* make second level little more square */
+    }
+    #SurfCMS-docs ul ul ul > li:before { /* 3rd level custom counter specific style */
+        background: #2E4E67;
+        border-radius: 0px; /* make third level square */
+    }
+    
+    #SurfCMS-docs code, .console {
+        display: inline-block;
+        position: relative;
+        top: .3em;
+        white-space: nowrap;
+        white-space: pre;
+        overflow: auto;
+        max-width: 90%;
+        /*min-width: 250px;*/
+        vertical-align: bottom;
+        -webkit-border-radius: 5px;
+           -moz-border-radius: 5px;
+              border-radius: 5px;
+    }
+    #SurfCMS-docs .console {
+        margin: 0;
+        padding: 1px 25px 1px 5px;
+        font: 85%/1.2 "Courier New", Courier, monospace;
+        letter-spacing:1px;
+        background-color: #000000;
+        color: #FFFFFF;
+    }
+    #SurfCMS-docs code {
+        margin: 0;
+        padding: 0 .8em;
+        top: -.005em;
+        font: 100%/1.4 "Courier New", Courier, monospace;
+        background-color: #EEEEEE;
+    }
+    #SurfCMS-docs .prompt {
+        font-family: "Courier New", Courier, monospace;
+        letter-spacing:1px;
+        color: #999;
+    }
+    #SurfCMS-docs .cursor {
+        font-family: "Courier New", Courier, monospace;
+        letter-spacing:1px;
+        background-color: #0F0;
+    }
+    #SurfCMS-docs .green {
+        font-family: "Courier New", Courier, monospace;
+        letter-spacing:1px;
+        color: #0F0;
+    }

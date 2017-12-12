@@ -1,0 +1,476 @@
+<link id="stylesheet" href="css/styles.css" rel="stylesheet">
+
+<div id="SurfCMS-docs">
+
+    <div class="container content-banner installed_hidden">
+      <div class="content-banner-title">
+        <h1>Surfalot CMS</h1>
+        <h3>Installation and Configuration</h3>
+      </div>
+      <div class="content-banner-logo"></div>
+    </div>
+    
+    <p>&nbsp;</p>
+    <div class="container contents-block">
+      <div class="col-8 col-m-12 fleft contents-block">
+        <div style="margin-left:50px;">
+          <h2 style="position:relative; left: 32px;">Contents</h2>
+          <ul>
+            <li><a href="#InstallationInstructions">Installation Instructions</a></li>
+            <li><a href="#ConfigurationInstructions">Configuration Instructions</a></li>
+            <li><a href="#LocalTinyMCE">Local TinyMCE WYSIWYG Editor Installation</a></li>
+            <li><a href="#LocalBootstrap">Local Bootstrap and Font Awesome Installation</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="col-4 col-m-12 fleft">
+        <div class="highlight-block donate-block">
+          <p>Apps take a considerable amount of time to build, support and maintain. Please, if you find this useful, thank me in the forum or consider a donation.</p>
+          <p><form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+          <input type="hidden" name="cmd" value="_s-xclick">
+          <input type="hidden" name="hosted_button_id" value="PPTHQLGY9MMWE">
+          <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+          <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+          </form></p>
+        </div>
+      </div>
+    </div>
+    <div class="clearfix"></div>
+    
+
+    <p>&nbsp;</p>
+    <div class="container content-banner">
+      <div class="content-banner-title">
+        <span id="InstallationInstructions"><h2>Installation Instructions</h2></span>
+      </div>
+    </div>
+    <div class="indented">
+        <p class="highlight-block">Please backup your files and database before installing this and any add-on. 
+           Great care has been taken to produce quality code, but I accept no responsibility for any damages,
+           either business or private, as a result of using this code. This code is provided "as is" and you 
+           are solely responsible for support and maintenance of the code and your shop.</p>
+           
+        
+        <ol>
+        <li>You will find two <strong>"catalog"</strong> folders in the package. The <code>catalog (new files)</code> 
+            folder can be uploaded in its entirety. They are all new files there that will not conflict with your current
+            shop files. Please take care to maintain the folder structure intact.</li>
+            
+            
+        <li>The folder <code>catalog (modified osCommerce files)</code> contains two modified existing shop files.<br />
+            <em>There are three options to proceed here:</em><br />
+            <strong>Compare:</strong> Use comparison software like Beyond Compare to merge changes into your current shop.<br />
+            <strong>Copy Over Unmodified Files:</strong> If you haven't modified them yet, you can simply copy them into place from this folder.<br />
+            <strong>Manually Modify Files:</strong> the following are the changes you will need to make to two files.<br />
+            <br />
+            <span class="paragraph-title">Manually Modify Files</span>
+            <p>As usual, the "catalog" part of each file path refers to the root of the shop, not an actual folder.</p>
+        
+        <ol>
+        <li><span class="paragraph-title">In: catalog/includes/application_top.php</span>
+            add the following code to the very end, just before the final <code>?&gt;</code><br />
+            <br />
+<textarea wrap="off" rows="2">
+  // BOC: SurfCMS
+  $OSCOM_Hooks->register('application');
+</textarea> <br />
+            <br />
+            Finished! Upload <strong>catalog/includes/application_top.php</strong><br />
+            <br />
+            <br />
+            </li>
+            
+
+        <li>In the file <strong>/includes/classes/osc_template.php</strong>, find this code near the top:<br />
+            <br />
+<span class="title">Find</span>
+<textarea wrap="off" rows="8">
+  class oscTemplate {
+    var $_title;
+    var $_blocks = array();
+    var $_content = array();
+    var $_grid_container_width = 12;
+    var $_grid_content_width = BOOTSTRAP_CONTENT;
+    var $_grid_column_width = 0; // deprecated
+    var $_data = array();
+</textarea><br />
+            <br />
+            <br />
+<span class="title">Immediately after, add the following</span>
+<textarea wrap="off" rows="1">
+    var $_sort_order = 0; // SurfCMS added for temporary storage between instantiating a block/content and adding it to template array().
+</textarea><br />
+            <br />
+            </li>
+            
+            
+        <li>Also in the file <strong>catalog/includes/classes/osc_template.php</strong> find near line 58:<br />
+            <br />
+<span class="title">Find</span>
+<textarea wrap="off" rows="3">
+    function addBlock($block, $group) {
+      $this->_blocks[$group][] = $block;
+    }
+</textarea><br />
+            <br />
+            <br />
+<span class="title">Replace with</span>
+<textarea wrap="off" rows="11">
+    function addBlock($block, $group, $sort = null) {
+      // BOC: SurfCMS
+      if ( !isset($sort) ) {
+        $sort = $this->_sort_order;
+      }
+      if ( !is_numeric($sort) ) $sort = 0;
+      for ($i=0; isset($this->_blocks[$group][((int)$sort+$i)]); $i++) {}
+      $this->_blocks[$group][((int)$sort+$i)] = $block;
+      // EOC: SurfCMS
+      // $this->_blocks[$group][] = $block;  // SurfCMS  removed
+    }
+</textarea><br />
+            <br />
+            </li>
+
+
+        <li>Also in the file <strong>catalog/includes/classes/osc_template.php</strong> find near line 66:<br />
+            <br />
+<span class="title">Find</span>
+<textarea wrap="off" rows="5">
+    function getBlocks($group) {
+      if ($this->hasBlocks($group)) {
+        return implode("\n", $this->_blocks[$group]);
+      }
+    }
+</textarea><br />
+            <br />
+            <br />
+<span class="title">Replace with (one line added)</span>
+<textarea wrap="off" rows="6">
+    function getBlocks($group) {
+      if ($this->hasBlocks($group)) {
+        ksort($this->_blocks[$group]); // SurfCMS added
+        return implode("\n", $this->_blocks[$group]);
+      }
+    }
+</textarea><br />
+            <br />
+            </li>
+        
+        
+        <li>Also in the file <strong>catalog/includes/classes/osc_template.php</strong> find near line 97:<br />
+            <br />
+<span class="title">Find</span>
+<textarea wrap="off" rows="7">
+              if ( class_exists($class) ) {
+                $mb = new $class();
+
+                if ( $mb->isEnabled() ) {
+                  $mb->execute();
+                }
+              }
+</textarea><br />
+            <br />
+            <br />
+<span class="title">Replace with (one line added)</span>
+<textarea wrap="off" rows="8">
+              if ( class_exists($class) ) {
+                $mb = new $class();
+
+                if ( $mb->isEnabled() ) {
+                  $this->_sort_order = (int)$mb->sort_order; // SurfCMS added
+                  $mb->execute();
+                }
+              }
+</textarea><br />
+            <br />
+            </li>
+        
+        
+        <li>Also in the file <strong>catalog/includes/classes/osc_template.php</strong> find near line 110:<br />
+            <br />
+<span class="title">Find</span>
+<textarea wrap="off" rows="3">
+    function addContent($content, $group) {
+      $this->_content[$group][] = $content;
+    }
+</textarea><br />
+            <br />
+            <br />
+<span class="title">Replace with</span>
+<textarea wrap="off" rows="11">
+    function addContent($content, $group, $sort = null) {
+      // BOC: SurfCMS
+      if ( !isset($sort) ) {
+        $sort = $this->_sort_order;
+      }
+      if ( !is_numeric($sort) ) $sort = 0;
+      for ($i=0; isset($this->_content[$group][((int)$sort+$i)]); $i++) {}
+      $this->_content[$group][((int)$sort+$i)] = $content;
+      // EOC: SurfCMS
+      // $this->_content[$group][] = $content;  // SurfCMS  removed
+    }
+</textarea><br />
+            <br />
+            </li>
+        
+        <li>Also in the file <strong>catalog/includes/classes/osc_template.php</strong> find near line 142:<br />
+            <br />
+<span class="title">Find</span>
+<textarea wrap="off" rows="7">
+        if ( class_exists($module) ) {
+          $mb = new $module();
+
+          if ( $mb->isEnabled() ) {
+            $mb->execute();
+          }
+        }
+</textarea><br />
+            <br />
+            <br />
+<span class="title">Replace with (one line added)</span>
+<textarea wrap="off" rows="8">
+        if ( class_exists($module) ) {
+          $mb = new $module();
+
+          if ( $mb->isEnabled() ) {
+            $this->_sort_order = (int)$mb->sort_order; // SurfCMS added
+            $mb->execute();
+          }
+        }
+</textarea><br />
+            <br />
+            </li>
+        
+        <li>Also in the file <strong>catalog/includes/classes/osc_template.php</strong> find near line 155:<br />
+            <br />
+<span class="title">Find</span>
+<textarea wrap="off" rows="3">
+      if ($this->hasContent($group)) {
+        return implode("\n", $this->_content[$group]);
+      }
+</textarea><br />
+            <br />
+            <br />
+<span class="title">Replace with (one line added)</span>
+<textarea wrap="off" rows="4">
+      if ($this->hasContent($group)) {
+        ksort ($this->_content[$group]); // SurfCMS added
+        return implode("\n", $this->_content[$group]);
+      }
+</textarea><br />
+            <br />
+            Finished! Upload <strong>catalog/includes/classes/osc_template.php</strong><br />
+            </li>
+        </ol>
+        
+            </li>
+        </ol>
+        
+    </div>
+       
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    <p><a href="#">[ top ]</a></p>
+    <p>&nbsp;</p>
+
+
+    <div class="container content-banner">
+      <div class="content-banner-title">
+        <span id="ConfigurationInstructions"><h2>Configuration Instructions</h2></span>
+      </div>
+    </div>
+    <div class="indented">
+    
+        <p>Surfalot CMS automatically installs the database component when it is accessed for the 
+           first time. You can do this by going to the new Administrative group in the Admin 
+           called <strong>Surfalot CMS</strong>. Click on <strong>List All</strong>. Alternatively, 
+           you can open your shop's home page.</p>
+        
+        
+        <p>&nbsp;</p>
+        <p><span class="paragraph-title">Surfalot CMS Admin Configuration Options</span>
+           Once installed, you may wish to review the configuration options in the <em>Configuration</em> 
+           section of the Admin under <em>Surfalot CMS</em>. You should see a direct link to the 
+           Configuration in the upper right corner of the <em>List All</em> page called 
+           <strong>Configure</strong>.</p>
+        
+        
+        <p>&nbsp;</p>
+        <p><span class="paragraph-title">Install Header Tags Modules</span>
+           One <em>Header Tags</em> module that is required to help Surfalot CMS function completely. 
+           Please Go to <strong>Admin &gt; Modules &gt; Header Tags &gt; Install Module</strong> button
+           To install the <strong>SEO - Pages</strong> Module. The rest of these <em>Header Tags</em> modules are not 
+           required by Surfalot CMS, but are quite useful: </strong>Category SEO, Manufacturer SEO, Product SEO</p>
+        
+        
+        <p>&nbsp;</p>
+        <p><span class="paragraph-title">SurfCMS Information Box Module</span>
+           The <em>SurfCMS App Pages</em> module is a Box module included with Surfalot CMS that you can 
+           fill with pages and links. If you wish to use it, install it in the Shop's Admin Modules Administrator here:
+           <strong>Modules &gt; Boxes &gt; Install Module &gt; SurfCMS App Pages</strong></p>
+           
+           
+        <p>&nbsp;</p>
+        <p><span class="paragraph-title">SurfCMS Navigation Bar Content Module</span>
+           The Navigation Bar is a Content Module you can use to display your shop's main navigation menu. To the Surfalot CMS Navbar you can 
+           add current pages, create new pages, other links, and osCommerce Community Edition Edge Navbar modules. For the convenience of
+           Community Edition GOLD shop owners, I have included the navigation bar modules with Surfalot CMS. GOLD shop owners can use
+           these within Surfalot CMS. Install the SurfCMS Navigation Bar in the Shop's Admin Modules Administrator here: 
+           <strong>Modules &gt; Content &gt; Install Module &gt; SurfCMS Navigation Bar</strong>.</p>
+           
+        <p><strong>You should to disable or remove the standard Community Edition <em>Navigation Bar</em> at this time, 
+           if it is already installed.</strong></p>
+           
+        <p>The standard Community Edition Navbar modules do not need to be installed 
+           through the Shop's Admin Modules Administrator themselves on Edge Shops, generally. 
+           <em>GOLD Shops do not have the Navbar Module installer, but the modules are included with Surfalot CMS and SHOULD work fine.</em>           </p>
+        <p>If you find one that doesn't behave correctly or needs its settings, install the Navbar module in 
+           <strong>Modules &gt; Navbar Modules &gt; Install Module</strong>, then set 
+           <strong>Enable</strong> to <strong>False</strong>. That will
+           ensure the module does not display twice and will display correctly in the <em>SurfCMS Navigation Bar</em>.</p>
+        <p>You may use Surfalot CMS to manage the entire Navbar menu if you wish. Surfalot CMS was designed to allow
+           the user flexibility to use both the standard osCommerce Navbar Module Installer and Surfalot CMS at the same time.
+           If you wish to use Surfalot CMS to manage the entire Navbar menu, you should remove modules from the standard 
+           Navbar Module Installer now. In <strong>Modules &gt; Navbar Modules</strong>, click on a module and then click the
+           <em>Remove Module</em> button on the right. Leave the <em>Hamburger Button</em> installed and enabled here. It is
+           required to display a menu on smaller devices.</p>
+        <p>You may use wish to install the Sample Menu for a head start. Go to the Surfalot CMS Admin menu and select Utilities/Guide.
+           Then on the right, click the Insert a Sample Menu button, and confirm install. This menu is similar to the Navbar that is
+           included with osCommerce Community Edition GOLD.</p>
+		   
+        <p>A new Navbar module is included with Surfalot CMS. It is called the <em>Brand Image</em> module. It is just like the Brand module, except
+           that is uses the Shop's logo in place of the Shop's name. You can update the logo image to any image you have uploaded.
+           It will insert the logo defined in the <strong>Admin > Configuration > Shop Logo</strong> by default.</p>
+
+    <p>&nbsp;</p>
+    <p><a href="#">[ top ]</a></p>
+    <p>&nbsp;</p>
+    </div>
+
+
+    <div class="container content-banner">
+      <div class="content-banner-title">
+        <span id="LocalTinyMCE"><h2>Local TinyMCE WYSIWYG Editor Installation</h2></span>
+      </div>
+    </div>
+            
+    <div class="indented">
+    <p>If you desire a local installation of TinyMCE instead of a CDN retrieval, this is how. Surfalot CMS is 
+       setup to look for a local installation
+       first. All you need to do is download the TinyMCE Community version and install it on your server. At the date of this 
+       publication, the download place is: 
+       <a href="https://www.tinymce.com/download/" title="Download TinyMCE" target="_blank">https://www.tinymce.com/download/</a></p>
+
+    <p>Within the download package you will find several folders. Find the <em><strong>tinymce</strong></em> folder that contains 
+       the file <strong>tinymce.min.js</strong>. Copy that <em><strong>tinymce</strong></em> folder to the shop folder <code>catalog/ext/</code>.
+       The full path to the tinymce.min.js file should be: <code>catalog/ext/tinymce/tinymce.min.js</code>.<br />
+       <br />
+       <em>** As usual, "catalog" refers to the root of your shop, not the first subfolder.</em></p>
+            
+    <p>&nbsp;</p>
+    <p><a href="#">[ top ]</a></p>
+    <p>&nbsp;</p>
+    </div>
+            
+
+
+    <div class="container content-banner">
+      <div class="content-banner-title">
+        <span id="LocalBootstrap"><h2>Local Bootstrap and Font Awesome Installation</h2></span>
+      </div>
+    </div>
+    <div class="indented">
+
+    <p><strong>Please Note:</strong> <em>This is optional and not necessarily preferred for production shops. Mainly for those
+       developing on local platforms. Do your own research and make your own judgement on CDN vs Local installation.</em></p>
+
+    <p>&nbsp;</p>
+    <p><span class="paragraph-title">Local Bootstrap Install for osCommerce v2.3.4 Official Only</span>
+       <em>Those of you with the osCommerce Community Editions can skip this. It is already locally installed on your shop.</em></p>
+
+    <p>If you desire a local installation of Bootstrap CSS, Bootstrap Javascript, and Font Awesome 
+       instead of a CDN retrieval, this is how. Surfalot CMS is setup to look for a local installation
+       first. All you need to do is download the files and install it on your server. At the date of this 
+       publication, the download place is: 
+       <a href="https://getbootstrap.com/docs/3.3/" title="Download Bootstrap" target="_blank">https://getbootstrap.com/docs/3.3/</a></p>
+
+    <p>Create a new folder called <strong>bootstrap</strong> in your shop's <code>catalog/ext/</code> folder.</p>
+    
+    <p>Within the download package you will find several folders.</p>
+    
+    <p>Find the <em><strong>css</strong></em> folder that contains the file <strong>bootstrap.min.css</strong>. 
+       Copy the <em><strong>css</strong></em> folder from the bootstrap download
+       to your new shop folder: <strong>catalog/ext/bootstrap</strong>.
+       The full path to the bootstrap.min.css file should be: <br /><code>catalog/ext/bootstrap/css/bootstrap.min.css</code></p>
+    
+    <p>Find the <em><strong>js</strong></em> folder that contains <strong>bootstrap.min.js</strong>. 
+       Copy the <em><strong>js</strong></em> folder from the bootstrap download
+       to your new shop folder: <strong>catalog/ext/bootstrap</strong>.
+       The full path to the bootstrap.min.js file should be: <br /><code>catalog/ext/bootstrap/js/bootstrap.min.js</code></p>
+       
+    <p><em>** As usual, "catalog" refers to the root of your shop, not the first subfolder.</em></p>
+        
+    <p>&nbsp;</p>
+    <p><span class="paragraph-title">Font Awesome Install for osCommerce v2.3.4 All Versions</span>
+       Now we'll download and install Font Awesome.  At the date of this publication, the download place is: 
+       <a href="http://fontawesome.io/" title="Download Font Awesome" target="_blank">http://fontawesome.io/</a></p>
+
+    <p>Create a folder called <strong>font-awesome</strong> in your shop's <code>catalog/ext/</code> folder.</p>
+
+    <p>Within the download package you will find several folders.</p>
+    
+    <p>Find the <em><strong>css</strong></em> folder that contains 
+       the file <strong>font-awesome.min.css</strong>. Copy the <em><strong>css</strong></em> folder from the download package 
+       to your new shop folder: <strong>catalog/ext/font-awesome</strong>.
+       The full path to the font-awesome.min.css file should be: <code>catalog/ext/font-awesome/css/font-awesome.min.css</code>.</p>
+
+    <p>Find the <strong><strong>fonts</strong></strong> folder that contains 
+       the file <strong>fontawesome-webfont.woff2</strong>. Copy the <em><strong>fonts</strong></em> folder from the download package 
+       to your new shop folder: <strong>catalog/ext/font-awesome</strong>.
+       The full path to the fontawesome-webfont.woff2 file should be: <code>catalog/ext/font-awesome/fonts/fontawesome-webfont.woff2</code>.</p>
+
+    <p><em>** As usual, "catalog" refers to the root of your shop, not the first subfolder.</em></p>
+
+    <p>For <strong>osCommerce v2.3.4 Official</strong> shop folks:<br /> 
+       When installed, the <em>Header Tags module:</em> <strong>Font Awesome Head Link</strong> 
+       included with Surfalot CMS will add the Font Awesome link tag in your shop's header.</p>
+            
+    <p>For <strong>osCommerce v2.3.4 Community Edition</strong> shop folks:<br />
+       In order to utilize the local installation of Font Awesome, you must make a change to your <strong>template_top.php</strong> file.<br />
+            <br />
+<span class="title">Find in <strong>catalog/includes/template_top.php</strong></span>
+<textarea wrap="off" rows="1">
+&lt;link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"&gt;
+</textarea><br />
+            <br />
+            <br />
+<span class="title">Replace with</span>
+<textarea wrap="off" rows="7">
+&lt;?php
+  if ( file_exists('ext/font-awesome/css/font-awesome.min.css') ) {
+    echo '&lt;link rel="stylesheet" type="text/css" href="ext/font-awesome/css/font-awesome.min.css"&gt;' . "\n";	
+  } else {
+    echo '&lt;link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous"&gt;' . "\n";	
+  }
+?&gt;
+</textarea><br />
+            <br />
+            Finished! Upload <strong>catalog/includes/template_top.php</strong><br /></p>
+
+    <p>&nbsp;</p>
+    <p><a href="#">[ top ]</a></p>
+    <p>&nbsp;</p>
+    </div>
+
+    <p>&nbsp;</p>
+    <div class="container content-banner">
+      <div class="content-banner-title">
+        <h3>Surfalot CMS &copy; 2017 Todd Holforty . mtholforty [at] surfalot [dot] com</h3>
+      </div>
+    </div>
+
+</div>
+
+<p>&nbsp;</p>
+<p>&nbsp;</p>
+

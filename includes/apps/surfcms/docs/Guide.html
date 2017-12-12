@@ -1,0 +1,449 @@
+<link id="stylesheet" href="css/styles.css" rel="stylesheet">
+
+<div id="SurfCMS-docs">
+
+    <div class="container content-banner installed_hidden">
+      <div class="content-banner-title">
+        <h1>Surfalot CMS</h1>
+        <h3>Operation Guide</h3>
+      </div>
+      <div class="content-banner-logo"></div>
+    </div>
+    
+    <p>&nbsp;</p>
+    <div class="container contents-block">
+      <div class="col-8 col-m-12 fleft contents-block">
+        <div style="margin-left:35px;">
+          <h2 style="position:relative; left: 48px;">Contents</h2>
+          <ol>
+            <li><a href="#createpage">Create and edit page content</a></li>
+            <li><a href="#navbarmenu">Manage the Surfalot CMS Navigation Bar</a></li>
+            <li><a href="#navbarcontent">Add text and links to the Surfalot CMS Navigation Bar</a></li>
+            <li><a href="#sidebartextbox">Add text boxes to the left and right box columns</a></li>
+            <li><a href="#modulesshortcodes">Surfalot CMS modules and shortcode content</a></li>
+            <li><a href="#sidebarinfobox">Manage Surfalot CMS sidebar info box</a></li>
+          </ol>
+        </div>
+      </div>
+      <div class="col-4 col-m-12 fleft">
+        <div class="highlight-block donate-block">
+          <p>Apps take a considerable amount of time to build, support and maintain. Please, if you find this useful, thank me in the forum or consider a donation.</p>
+          <p><form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank">
+          <input type="hidden" name="cmd" value="_s-xclick">
+          <input type="hidden" name="hosted_button_id" value="PPTHQLGY9MMWE">
+          <input type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!">
+          <img alt="" border="0" src="https://www.paypalobjects.com/en_US/i/scr/pixel.gif" width="1" height="1">
+          </form></p>
+        </div>
+      </div>
+    </div>
+                
+    <p>&nbsp;</p>
+    
+    <div class="container content-banner">
+      <div class="content-banner-title">
+        <h2>Operation</h2>
+      </div>
+    </div>
+    <img id="doc-img-src" src="images/doc_demo.jpg" style="width:100%;" />
+    
+    <p>&nbsp;</p>
+    <div class="container content-banner">
+      <div class="content-banner-title">
+        <h2>Guide</h2>
+      </div>
+    </div>
+    
+    <span id="createpage"><p>&nbsp;</p></span>
+    <ol>
+      <li><span class="section-title">Create and Edit Page Content</span>
+      
+        <p>You can dynamically create site pages and link them into your menu easily and automatically.</p>
+        <p>You can create only one <em>Page</em> entry in Surfalot CMS under any given Page or Group name. 
+           You may add additional <em>Page Content</em> entries to that Page/Group name that will be added together
+           to form the full content of that page. For example, you can create one <em>Page</em> named
+           "my_page" with a width of 3 (Bootstrap width). Then you can create three  more <em>Page Content</em>
+           entries named "my_page", each with the width of 3. Or you may create an additional <em>Page Content</em>
+           entry named "my_page" with the width of 3 and one more with the width of 6.
+           Remember a full Bootstrap page width is a total of 12 "widths". You may continue and create more for additional rows of content.</p>
+        <ol>
+        
+          <li>Click on <em>New Page</em> on the sidebar or under the <em>Item List</em></li>
+    
+          <li><span class="list-title">Page Name</span> entry:<br />
+              <br />
+              <strong>Existing Page</strong><br />
+              You may choose an existing page from the drop down list. When you choose an existing page,
+              you may need to add a small code snippet to the PHP page to enable inserting the page Body content. 
+              Some pages like Conditions, Shipping, and Privacy have the constant <em>TEXT_INFORMATION</em> 
+              already embedded. In those cases, you don't need to change the existing page. Other pages
+              may require having the following snippet installed. You may choose either of these two options 
+              to embed the Body of your content into the desired page. Existing pages can be automatically inserted
+              into the <em>SurfCMS Navigation Bar</em> content module and <em>SurfCMS App Pages</em> boxes module.<br />
+              <br />
+              <u>Page Constant method</u><br />
+              <textarea wrap="off" rows="1">&lt;?php echo TEXT_INFORMATION; ?&gt;</textarea><br />
+              <br />
+              <u>Template getContent Code method</u><br />
+              Replace <strong>page_name</strong> in the snippet with the actual page name you created<br />
+              (without the .php extention).<br />
+              <textarea wrap="off" rows="1">&lt;?php echo $oscTemplate->getContent('page_name'); ?&gt;</textarea><br />
+              <br />
+              <strong>Custom/New Page</strong><br />
+              You may choose to create a page that doesn't exist on the site. In this case simply enter a unique name into the 
+              Page Name entry box. The page will be accessible from your domain at: <strong>mydomain.com/surfcms.php?pg=3</strong>.
+              The 3 in that address will be the actual ID of the page when it is saved. After saving your page, Surfalot CMS will display the page address in the info box to the right of the page list. Custom pages can be automatically inserted
+              into the <em>SurfCMS Navigation Bar</em> content module and <em>SurfCMS App Pages</em> boxes module by selecting the appropriate radio buttons.<br />
+              <br />
+              Beside the existing page names within the osCommerce shop, there are some reserved names that should not be used for Page Name. Those are:
+              navigation, header, footer, footer_suffix.<br />
+              <br />
+              <strong>Multiple Content Groups on a Single Page</strong><br />
+              It is certainly possible to create multiple Content Groups on a single page. Lets say you
+              want to have a block above and below a product's information on to Product Info page. You would create a Page
+              with the <em>Page Name</em> as <strong>product_info</strong>. You can enter the content details for the first
+              block here. You may also create additional Page Content with the <em>Page Name</em> <strong>product_info</strong>
+              and they will all be grouped together in this area. Place the following code where you want it to appear
+              on the page <code>product_info.php</code><br />
+              <textarea wrap="off" rows="1">&lt;?php echo $oscTemplate->getContent('product_info'); ?&gt;</textarea><br />
+              <br />
+              You can now create another Content Group for below the product's information. Select <em>New Page Content</em>
+              button and use the <em>Page Name</em> of <strong>product_info_second_area</strong>. Enter the content you wish in this area,
+              and save it. You can create multiple blocks using this new Content Group here also. Now place the 
+              following code in <code>product_info.php</code> where you wish the content to appear.<br />
+              <textarea wrap="off" rows="1">&lt;?php echo $oscTemplate->getContent('product_info_second_area'); ?&gt;</textarea><br />
+              <br />
+              To make multiple content areas to work on a single page, the Page Name for the second or third areas need to begin with the original
+              Page Name you started with. Surfalot CMS will collect all the Content Groups that start with the original Page Name
+              and be ready to display them when that page loads.
+              </li>
+    
+          <li><span class="list-title">Page Query String</span> entry:<br />
+              If the menu link to your page requires a Query String, enter it here. It is not necessary to enter the "?" at the beginning.<br />
+          </li>
+          
+          <li><span class="list-title">Sort Order</span> entry:<br />
+              This is the order in which the content will be inserted into the <em>SurfCMS Navigation Bar</em> content module and <em>SurfCMS App Pages</em> boxes module. This is also the sort order used if you create  multiple content blocks for a single page or Content Group.<br />
+          </li>
+          
+          <li><span class="list-title">Status, In Navbar, In Side Box</span> selectors:<br />
+              <strong>Status</strong> is a way to enable or disable the content item.<br />
+              <strong>In Navbar</strong> specifies whether this content will be inserted into the <em>SurfCMS Navigation Bar</em> content module and where.<br />
+              <strong>In Side Box</strong> specifies whether this content will be inserted into the <em>SurfCMS App Pages</em> boxes module.<br />
+          </li>
+          
+          <li><span class="list-title">Navbar Parent</span> entry:<br />
+              In the <em>SurfCMS Navigation Bar</em> Content Module, you may specify whether this content page is displayed in the root of the menu or a 
+              submenu item. Pages cannot be a Navbar submenu parent themselves. Submenu parents are clickable/tapable to expose 
+              the submenu only.<br />
+          </li>
+          
+          <li><span class="list-title">Nav Menu Icon</span> entry:<br />
+              <a href="http://fontawesome.io/icons/" class="info-link" target="_blank">Font Awesome</a> icons are available for 
+              use in osCommerce Community Edition. You may enter a code here for be shown on the <em>SurfCMS Navigation Bar</em> content module.<br />
+          </li>
+          
+          <li><span class="list-title">Nav Menu Text</span> entry:<br />
+              The text to be displayed on the<em> SurfCMS Navigation Bar</em> content module and <em>SurfCMS App Pages</em> boxes module. This can be different from the page title for SEO value.<br />
+          </li>
+          
+          <li><span class="list-title">Page Title</span> entry:<br />
+              Enter the page title of the content. This is displayed on the page as the title.<br />
+          </li>
+          
+          <li><span class="list-title">Content Width</span> selector:<br />
+              This is the width do be used in a Bootstrap container. If zero is specified, no Bootstrap container will be used. (12 = full width, 6 = half width, 4 = third width, 3 = quarter width).<br />
+          </li>
+          
+          <li><span class="list-title">Body</span> entry:<br />
+              Enter all the content you desire to be displayed. When using the WYSIWYG editor, there are some osCommerce specific presets available. For more control, you may wish to insert a preset to start, and save your content, then return to edit the HTML without the WYSIWYG editor afterward.<br />
+          </li>
+          
+          <li><span class="list-title">Breadcrumb Title, Meta Title, Meta Description, Meta Keywords</span> entry:<br />
+              These entries will override the default, which is using the page title. For Meta Title, Meta Description, and Meta Keywords to work, you must
+              enable this <em>Header Tags</em> module: <strong>Modules &gt; Header Tags &gt; Install Module &gt; SEO - Pages</strong><br />
+              <br />
+              This will not override these following modules that dynamically update the META content based on your shop's products and categories in the Edge Edition: Category SEO, Manufacturer SEO, and Product SEO.
+          </li>
+          
+        </ol>
+        
+        <p>&nbsp;</p>
+        <p><a href="#">[ top ]</a></p>
+    
+        <span id="navbarmenu"><p>&nbsp;</p></span>
+      </li>
+    
+    
+    
+    
+      <li><span class="section-title">Manage Surfalot CMS Navigation Bar</span>
+        <p>You must install the <em>SurfCMS Navigation Bar</em> content module from 
+            <strong>Admin &gt; Modules &gt; Content &gt; Install Module &gt; SurfCMS Navigation Bar</strong> to
+            enable the navbar menu management. You can add current pages, create new pages,
+            add standard osCommerce Navbar modules, and other links all from the admin.</p> 
+    
+        <p>The <em>SurfCMS Navigation Bar</em> content module will display standard osCommerce Navbar modules along with other content links. 
+           The standard osCommerce Navbar modules do not need to be installed through the <strong>Admin &gt; Modules</strong> utility themselves, generally.
+           If you find a Navbar module that doesn't behave correctly or needs its settings, install the Navbar module in 
+           <strong>Modules &gt; Navbar Modules &gt; Install Module</strong>, then set 
+           <strong>Enable</strong> to <strong>False</strong>. That will
+           cause  the module not to display on its own, but will display in the <em>SurfCMS Navigation Bar</em> content module.</p>
+           
+        <p>You may use Surfalot CMS to manage the entire Navbar menu if you wish. Surfalot CMS was designed to allow
+           the user flexibility to use both the standard osCommerce Navbar Module Installer and Surfalot CMS at the same time. Items from each should sort together and play nicely. If you wish to use Surfalot CMS to manage the entire Navbar menu, you should remove modules from the standard 
+           Navbar Module Installer now. In <strong>Modules &gt; Navbar Modules</strong>, click on a module and then click the
+           <em>Remove Module</em> button on the right. Leave the <em>Hamburger Button</em> installed and enabled here. It is
+           required to display a menu on smaller devices.</p>
+    
+        <p>You will find a set of radio buttons on <strong>Pages</strong>, <strong>Menu Items</strong>, <strong>Navbar Submenu</strong>, and <strong>Navbar Block</strong> content entry forms called <em>In Navbar</em>. The <em>In Navbar</em> radio selectors are Home, Left, Right, Disabled. You will select the section each content item is placed if you decide to show the Content on this SurfCMS Navigation Bar.  On the Block content entry page
+           those radio buttons are read-only. They are selected automatically depending on the Navbar block area you choose.</p>
+    
+        <p><span class="paragraph-title">Pages</span>
+           The pages you create, or existing pages you're editing via Surfalot CMS may be added to the <em>SurfCMS Navigation Bar</em> module by 
+           simply activating the <em>In Navbar</em> setting within the page editor. The Sort Order setting tells Surfalot CMS where to place
+           the menu item in the list. The <em>Page Content entry form</em> is described above.</p>
+    
+        <p><span class="paragraph-title">Menu Items</span>
+           Menu Items option is available to insert any URL into the Navbar or Sidebar menus. No actions or
+           translations are performed on this item. It is linked and displayed as entered. </p>
+           
+           <ol>
+             <li>Click the <strong>New Menu Item</strong> button on the Surfalot CMS <em>List All</em> page to start a new Menu Item.</li>
+             
+             <li><span class="list-title">Navbar Module</span> selector:<br />
+                 You may select an existing Navbar Module to be place in this menu position. Modules cannot be placed on a submenu. If a <em>Navbar Module</em> item is chosen, the <em>Link URL</em> will be locked out since you can't do both.</li>
+               
+             <li><span class="list-title">Link URL</span> entry:<br />
+                 You may enter a local or off-site URL here. The URL will be placed on the Navbar or Sidebar box as entered. 
+                 If this item is entered, the <em>Navbar Module</em> will be locked out. Can't do both.</li>
+    
+             <li><span class="list-title">Sort Order</span> entry:<br />
+               This is the order in which the content will be inserted into the Navbar or Sidebar box menu list.<br />
+             </li>
+          
+             <li><span class="list-title">Status, In Navbar, In Side Box</span> selectors:<br />
+               <strong>Status</strong> is a way to enable or disable the content item.<br />
+               <strong>In Navbar</strong> specifies the section where this content will be shown in the Navbar or whether it is
+                disabled.<br />
+               <strong>In Side Box</strong> specifies whether this content will be inserted into the SurfCMS Sidebar Box. Navbar Content Modules cannot be placed on the Sidebar.<br />
+             </li>
+          
+             <li><span class="list-title">Navbar Parent</span> entry:<br />
+               In the SurfCMS Navigation Bar module, you may specify whether this content page is display in the root of the menu or a 
+               submenu item. Pages cannot be a Navbar Submenu parent themselves. Submenu parents are clickable/tapable to expose 
+               the submenu only.<br />
+             </li>
+          
+             <li><span class="list-title">Nav Menu Icon</span> entry:<br />
+               <a href="http://fontawesome.io/icons/" class="info-link" target="_blank">Font Awesome</a> icons are available for 
+               use in osCommerce Community Edition shops. You may enter a code here for be shown on the <em>SurfCMS Navigation Bar</em> module.<br />
+             </li>
+          
+             <li><span class="list-title">Nav Menu Text</span> entry:<br />
+               The text to be displayed on the <em>SurfCMS Navigation Bar</em> module. This can be different from the page title for SEO value.<br />
+             </li>
+           </ol>
+    
+        <p><span class="paragraph-title">Navbar Submenu Items</span>
+           Submenu items are triggers to open a submenu. They cannot be a submenu item themselves.</p>
+           
+           <ol>
+             <li>Click the <em>New Nav-submenu</em> link or button to add.</li>
+             
+             <li><span class="list-title">Sort Order</span> entry:<br />
+               This is the order in which the content will be inserted into the Nav list.<br />
+             </li>
+          
+             <li><span class="list-title">Status and In Navbar</span> selectors:<br />
+               <strong>Status</strong> is a way to enable or disable the content item.<br />
+               <strong>In Navbar</strong> specifies the section where this content will be shown in the Navbar. Submenu items 
+                      cannot be disabled within the In Navbar selectors. Submenu items also cannot be placed in the Home position.<br />
+             </li>
+          
+             <li><span class="list-title">Nav Menu Icon</span> entry:<br />
+               <a href="http://fontawesome.io/icons/" class="info-link" target="_blank">Font Awesome</a> icons are available 
+               for use in osCommerce Community Edition shops. You may enter a code here for be shown on the <em>SurfCMS Navigation Bar</em> module.<br />
+             </li>
+          
+             <li><span class="list-title">Nav Menu Text</span> entry:<br />
+               The text to be displayed on the <em>SurfCMS Navigation Bar</em> module. This can be different from the page title for SEO value.<br />
+             </li>
+           </ol>
+    
+    
+        <p>&nbsp;</p>
+        <p><a href="#">[ top ]</a></p>
+    
+        <span id="navbarcontent"><p>&nbsp;</p></span>
+      </li>
+    
+    
+    
+    
+      <li><span class="section-title">Add Text and Links to the Surfalot CMS Navigation Bar</span>
+        <p>Block items are content that will be inserted into the Navbar as written / coded on the content entry page. Block items can be 
+           text, links, graphics, or really anything. Adding text and links to the Navbar Area without creating a module is easy.</p>
+           
+           <ol>
+             <li>Click the <em>New Navbar Block</em> button from the Surfalot CMS Admin <em>List All</em> menu.</li>
+             
+             <li><span class="list-title">Group Name</span> entry:<br />
+               Select <strong>Navbar: Left</strong>, <strong>Navbar: Right</strong>, or if you currently do not have a site logo or 
+               title in the <strong>Navbar Home</strong> position, you may choose that also. <br />
+             </li>
+    
+             <li><span class="list-title">Sort Order</span> selector:<br />
+               This is the order in which the content will be inserted into the SurfCMS Navigation Bar module and SurfCMS Sidebar Box. The item will be sorted into 
+               Surfalot CMS items as well as any other modules installed using the osCommerce Module Administrator.<br />
+             </li>
+    
+             <li><span class="list-title">Status and In Navbar</span> selectors:<br />
+               <strong>Status</strong> is a way to enable or disable the content item.<br />
+               <strong>In Navbar</strong> specifies the section where this content will be shown in the Navbar. With
+                        Block content, this is automatically selected based on the Group you choose above.<br />
+             </li>
+          
+             <li><span class="list-title">Title: (admin only)</span> entry:<br />
+               Text to be displayed in the admin to identify this content to you.<br />
+             </li>
+          
+             <li><span class="list-title">Body</span> entry:<br />
+               Enter all the content you desire to be displayed here. When using the WYSIWYG editor, there are some 
+               osCommerce specific presets available in the <em>osC Custom</em> drop menu. For Navbar Area
+               content you will want to start with the <strong>Navbar Text Block</strong> or <strong>Navbar Link Block</strong> 
+               items from that <em>osC Custom</em>  menu to achieve the correct spacing.<br />
+               <br />
+               <em>** <strong>A special note</strong> regarding the WYSIWYG editor:</em> It will auto-correct HTML while saving. The correct way to 
+               build this osC Template Navbar Area content is to start and end the content with List Item HTML tags without
+               either the Ordered List &lt;ol&gt; or Unordered List &lt;ul&gt; tags. It will look like this:<br />
+<textarea wrap="off" rows="3">
+ &lt;li class="navbar-text"&gt;
+   &lt;i class="fa fa-home"&gt;&lt;/i&gt;&lt;span class="hidden-sm"&gt;Some Text&lt;span&gt;
+ &lt;/li&gt;
+</textarea>
+               <br />
+               The WYSIWYG editor will add the Ordered List &lt;ol&gt; or Unordered List &lt;ul&gt; tags
+               if you use it to create this content. To create this correctly, you may wish to avoid the WYSIWYG editor.<br />
+               <br />
+               <em><strong>Also note:</strong></em> the content for this osC Template Navbar Area is white text on a dark background, so it may not show in 
+               the WYSIWYG editor. You may wish to insert the block, save it, and then return to edit it 
+               without the WYSIWYG editor to complete the content.<br />
+             </li>
+    
+           </ol>
+    
+        <p>&nbsp;</p>
+        <p><a href="#">[ top ]</a></p>
+    
+        <span id="sidebartextbox"><p>&nbsp;</p></span>
+      </li>
+
+
+
+
+      <li><span class="section-title">Add Text Boxes to Left and Right Box Columns</span>
+        <p>Adding text, links and graphics to the Sidebar Area without creating a module is easy.</p>
+           
+           <ol>
+             <li>Click the <em>New Navbar Block</em> button from the Surfalot CMS Admin <em>List All</em> menu.</li>
+             
+             <li><span class="list-title">Group Name</span> entry:<br />
+               Select <strong>Box: Left Column</strong>, <strong>Box: Right Column</strong>.<br />
+             </li>
+    
+             <li><span class="list-title">Sort Order</span> entry:<br />
+               This is the order in which the content will be inserted into the SurfCMS Navigation Bar module and SurfCMS Sidebar Box.<br />
+             </li>
+    
+             <li><span class="list-title">Status</span> selector:<br />
+               Status is a way to enable or disable the content item.<br />
+             </li>
+          
+             <li><span class="list-title">Title: (admin only)</span> entry:<br />
+               Text to be displayed in the admin to identify this content to you.<br />
+             </li>
+          
+             <li><span class="list-title">Body</span> entry:<br />
+               Enter all the content you desire to be displayed here. When using the WYSIWYG editor, there is a 
+               osCommerce specific presets available in the <em>osC Custom</em> drop menu. For Sidebar Area
+               content you may want to start with the <strong>Sidebar: Box with Header</strong> 
+               item to match the default sidebar boxes (Bootstrap Panel).<br />
+             </li>
+    
+           </ol>
+    
+        <p>&nbsp;</p>
+        <p><a href="#">[ top ]</a></p>
+    
+        <span id="modulesshortcodes"><p>&nbsp;</p></span>
+      </li>
+    
+    
+    
+    
+      <li><span class="section-title">Surfalot CMS Modules and Shortcode Content</span>
+        <p style="color:red;">This module is available as a bonus reward for a donation of $5 or more toward the development of Surfalot CMS.</p>
+        <p>Surfalot CMS accepts content modules for the purpose of fulfilling shortcodes placed in the Surfalot CMS content body. 
+           Currently included shortcode modules are; Date/Time, Buy Now Button, Generic Link Button, Insert Contact Form, Product Thumbnail, Product Special Thumbnail, YouTube Video, and Facebook Plugin.</p>
+        <p>We will use <em>Facebook Page Plugin</em> included in the App as an example. First, you will need to enable it in 
+           the modules administration tool: <strong>Modules &gt; Shortcode Modules &gt; Install Module &gt; Facebook Page Plugin</strong></p>
+        <p>You will add a shortcode snippet in a Surfalot CMS content body. It looks like this: <code>[sc_facebook_plugin]</code></p>
+        <p>When being displayed, Surfalot CMS will replace that shortcode snippet with a Facebook Page Plugin. Most of the options for the plugin
+           have been added to this module as parameters for demonstration value.</p>
+        <p>This is an example of a shortcode with some parameters:
+           <code>[sc_facebook_plugin url="https://www.facebook.com/facebook" width="400" height="250"]</code><br />
+            <br /></p>
+        <p>These are the conventions used in the parameters. It is important to keep this in mind since the code will have trouble 
+           parsing the parameters if formatted incorrectly.</p>
+        <ol>
+          <li>The name of the shortcode must directly follow the opening bracket without spaces as such:<br />
+                &nbsp; Correct: <code>[sc_facebook_plugin]</code><br />
+                &nbsp; WRONG: <code>[ sc_facebook_plugin ]</code></li>
+          <li>There must be no spaces between the parameter name and its value:<br />
+                &nbsp; Correct: <code>width="400"</code><br />
+                &nbsp; WRONG: <code>width = "400"</code></li>
+          <li>The shortcode name and each parameter must be separated with at least one space:<br />
+                &nbsp; Correct: <code>[sc_facebook_plugin width="400" height="250"]</code><br />
+                &nbsp; WRONG: <code>[sc_facebook_plugin width="400"height="250"]</code></li>
+        </ol>
+        
+        <span class="paragraph-title"></span>
+    
+        <p>&nbsp;</p>
+        <p><a href="#">[ top ]</a></p>
+    
+        <span id="sidebarinfobox"><p>&nbsp;</p></span>
+      </li>
+    
+    
+    
+    
+      <li><span class="section-title">Manage Surfalot CMS Sidebar Info Box</span>
+        <p>You must install the <em>SurfCMS App Pages</em> module from <strong>Modules &gt; Boxes</strong> module administrator.</p>
+        
+        <p>You may automatically place a page or link on the <em>SurfCMS Sidebar Box</em> using the <strong>In Side Box</strong>
+           setting within the page editor or the stoplight button on the <em>SurfCMS List Items</em> page.</p>
+    
+        <p><em>Page Content</em> and <em>Menu Item</em> links are available to be displayed in the Sidebar Info Box. Submenu's items are not 
+           actually content links and will not display in the Info Box. The content items actually contained in the Navbar 
+           Submenus can be displayed and are simply ordered as the item's sort 
+           order would denote. Font Awesome icons are not displayed in the SurfCMS Sidebar Info Box.</p>
+    
+        <p>&nbsp;</p>
+        <p><a href="#">[ top ]</a></p>
+    
+      </li>
+    </ol>
+
+    <p>&nbsp;</p>
+    <div class="container content-banner">
+      <div class="content-banner-title">
+        <h3>Surfalot CMS &copy; 2017 Todd Holforty . mtholforty [at] surfalot [dot] com</h3>
+      </div>
+    </div>
+
+    <p>&nbsp;</p>
+    <p>&nbsp;</p>
+    
+</div>
