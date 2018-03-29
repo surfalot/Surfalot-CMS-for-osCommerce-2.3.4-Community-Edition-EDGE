@@ -23,7 +23,7 @@
 	// construct / destruct
 	//
     protected function __construct() {} 
-    protected function __destruct() {} 
+    public function __destruct() {} 
 	
     // /////////////////////////////////////////////////////
     // Privatize Magic Methods

@@ -118,17 +118,24 @@
                                         " . $where_group . " 
                                         and ocd.language_id = '" . (int)$languages_id . "' 
                                         and oc.surfcms_content_type in ('0','1','2') 
-                                        and oc.surfcms_content_status='1' 
                                   ORDER BY oc.surfcms_content_sort_order" );
   
-      while ($item = tep_db_fetch_array($item_query)) {
+	  while ($item = tep_db_fetch_array($item_query)) {
+
+		if ($item['type'] == '0') $page_status = $item['status'];
+
+		if ($item['status'] == '1') {
+
+		  if ($item['type'] == '0')
+            $this->setPageDetail($item);
   
-        if ($item['type'] == '0') 
-          $this->setPageDetail($item);
-  
-        $this->addGroupContent($item);
+          $this->addGroupContent($item);
+		  
+		}
   
       }
+	  if (isset($page_status) && $page_status == '0') $this->status = 0; // set that we have content, but it status is off. $this->status will remain unset if there was no content found for the current page.
+
       ksort($this->group_content);
 
       return true;
@@ -254,7 +261,7 @@
 
       if ( $this->isActive() ) {
         if ( !empty($this->body) ) define('TEXT_INFORMATION', $this->body() );
-      } else {
+      } elseif ( isset($this->status) ) {
         define('TEXT_INFORMATION', $this->gridWrap($this->getDef('text_page_disabled'), '12'));
       }
       if ( !empty($this->navbar_title) )     define('NAVBAR_TITLE', $this->navbar_title() );

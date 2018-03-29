@@ -221,7 +221,7 @@ $nav_green_action_icons['3'] = '<a href="' . tep_href_link('surfcms.php', $stick
               </tr>
             </table>
             
-<p><div id="help-switch">Help ?</div></p>
+<div id="help-switch">Help ?</div>
 <div id="help-detail" style="width: 100%;display:none;"></div>
 <?php
 if ( SURFCMS_DISPLAY_MENU_SAMPLE_BOX == "True" && !$surfcms->isRestricted($admin['id'], 'menuing_boxes')) {

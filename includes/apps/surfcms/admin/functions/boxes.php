@@ -22,7 +22,7 @@
 			'link' => tep_href_link('surfcms.php', 'action=list'.$results)),
 	  array('code' => 'surfcms.php',
 			'title' => MODULES_ADMIN_MENU_SURFCMS_LIST_PAGES,
-			'link' => tep_href_link('surfcms.php', 'action=list&list_type=00'.$results)),
+			'link' => tep_href_link('surfcms.php', 'action=list&list_type=0'.$results)),
 	  array('code' => 'surfcms.php',
 			'title' => MODULES_ADMIN_MENU_SURFCMS_UTILITIES,
 			'link' => tep_href_link('surfcms.php', 'action=utilities&origin=list'.$results))

@@ -244,13 +244,13 @@
       }
       
       if ( tep_not_null($type) && $type == '4' ) {
-        $return = $url; 
+		$return = $url;
       } elseif ( tep_not_null($type) && $type == '3' ) {
-        $return = '#'; 
+        $return = '#';
       } elseif (tep_not_null($group) && file_exists(DIR_FS_CATALOG . $group . '.php')) {
-        $return = $funct($group . '.php' . (tep_not_null($url) ? (substr($url,0,1) == '?' ? $url : '?'.$url) : '')); 
+        $return = $funct($group . '.php', (tep_not_null($url) ? ltrim($url,'?') : '')); 
       } else {
-        $return = $funct('surfcms.php?pg=' . $id); 
+        $return = $funct('surfcms.php', 'pg=' . $id); 
       }
       
       return $return;

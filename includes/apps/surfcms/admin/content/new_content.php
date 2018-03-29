@@ -230,17 +230,22 @@
         if ( is_array($rest_blocks_array) && count($rest_blocks_array) ) {
             $group_input = tep_draw_pull_down_menu('surfcms_content_group', $rest_blocks_array, (tep_not_null($ocInfo->surfcms_content_group) ? $ocInfo->surfcms_content_group : ''), 'id="blockPulldown"');
         } else {
-            $group_input = tep_draw_input_field('surfcms_content_group', (tep_not_null($ocInfo->surfcms_content_group) ? $ocInfo->surfcms_content_group : (isset($_GET['group']) ? tep_db_prepare_input($_GET['group']) : '' ) ), 'id="groupField" size="25"');
+            $group_input = tep_draw_input_field('surfcms_content_group', (tep_not_null($ocInfo->surfcms_content_group) ? $ocInfo->surfcms_content_group : (isset($_GET['group']) ? tep_db_prepare_input($_GET['group']) : '' ) ), 'id="groupField" size="35"');
         } 
         ?>
+          <tr>
+            <td class="main">&nbsp;</td>
+            <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15'); ?>
+                             <?php echo ($ocInfo->surfcms_content_type=='0' ? $surfcms->getDef('text_content_name') : ($ocInfo->surfcms_content_type!='4' ? $surfcms->getDef('text_content_ref_id') : $surfcms->getDef('text_content_menu_item'))); ?> &nbsp;
+							 <?php if (!is_array($rest_blocks_array)) { echo ($ocInfo->surfcms_content_type=='0' ? $surfcms->getDef('text_content_name_ex') : ($ocInfo->surfcms_content_type!='4' ? $surfcms->getDef('text_content_ref_id_ex') : $surfcms->getDef('text_content_nav_module'))); } ?></td>
+          </tr>
           <tr>
             <td class="main"><?php echo ($ocInfo->surfcms_content_type=='0' ? $surfcms->getDef('text_content_name') : ($ocInfo->surfcms_content_type!='4' ? $surfcms->getDef('text_content_ref_id') : $surfcms->getDef('text_content_menu_item'))); ?></td>
             <td class="main"><?php echo tep_draw_separator('pixel_trans.gif', '24', '15') . '&nbsp;' . $group_input . 
                                                                                                        (is_array($groups_array) && count($groups_array) ? ' ' . tep_draw_pull_down_menu('group_names', $groups_array, (tep_not_null($ocInfo->surfcms_content_group) ? $ocInfo->surfcms_content_group : ''), 'id="groupPulldown"') : '') . 
                                                                                                        (is_array($files_array) && count($files_array) ? ' ' . tep_draw_pull_down_menu('file_names', $files_array, (tep_not_null($ocInfo->surfcms_content_group) ? $ocInfo->surfcms_content_group : ''), 'id="filePulldown"') : '') . 
                                                                                                        (is_array($blocks_array) && count($blocks_array) ? ' ' . tep_draw_pull_down_menu('block_names', $blocks_array, (tep_not_null($ocInfo->surfcms_content_group) ? $ocInfo->surfcms_content_group : ''), 'id="blockPulldown"') : '') . 
-                                                                                                       (is_array($nav_array) && count($nav_array) ? ' ' . tep_draw_pull_down_menu('nav_names', $nav_array, (tep_not_null($ocInfo->surfcms_content_group) ? $ocInfo->surfcms_content_group : ''), 'id="navPulldown"') : ''); ?> &nbsp; 
-                                                                                                       <?php if (!is_array($rest_blocks_array)) { echo ($ocInfo->surfcms_content_type=='0' ? $surfcms->getDef('text_content_name_ex') : ($ocInfo->surfcms_content_type!='4' ? $surfcms->getDef('text_content_ref_id_ex') : $surfcms->getDef('text_content_nav_module'))); } ?></td>
+                                                                                                       (is_array($nav_array) && count($nav_array) ? ' ' . tep_draw_pull_down_menu('nav_names', $nav_array, (tep_not_null($ocInfo->surfcms_content_group) ? $ocInfo->surfcms_content_group : ''), 'id="navPulldown"') : ''); ?></td>
           </tr>
 <?php } else { ?>
 <?php     echo tep_draw_hidden_field('surfcms_content_group', ''); ?>

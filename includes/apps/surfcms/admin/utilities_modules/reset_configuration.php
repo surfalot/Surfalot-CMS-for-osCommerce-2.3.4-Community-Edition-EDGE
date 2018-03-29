@@ -30,7 +30,7 @@
       $this->surfcms->loadLanguageFile('admin/utilities_modules/'.basename(__FILE__));
     } 
         
-    protected function __destruct() {} 
+    function __destruct() {} 
 
 
     // /////////////////////////////////////////////////////

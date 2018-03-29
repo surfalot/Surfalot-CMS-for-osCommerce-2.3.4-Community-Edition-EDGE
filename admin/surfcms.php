@@ -22,6 +22,7 @@
   $page = 'surfcms.php';
   $action =  (isset($_GET['action']) ? basename($_GET['action']) : 'list');
   $subaction = (isset($_GET['subaction']) ? basename($_GET['subaction']) : '');
+  $sticky_get_params = tep_get_all_get_params(array('ocID','type','subtype','action','subaction','commit_action','docopy','flag','navflag','boxflag','wysiwyg','origin'));
 
   $surfcms->loadLanguageFile('surfcms.admin.php');
 
@@ -38,8 +39,6 @@
   
   include('includes/template_top.php');
   echo '<link href="../includes/apps/surfcms/admin/css/styles.css" rel="stylesheet">' . "\n";
-  
-  $sticky_get_params = tep_get_all_get_params(array('ocID','type','subtype','action','subaction','commit_action','flag','navflag','boxflag','wysiwyg','origin'));
 
   // collect docs
   $docs = array();
